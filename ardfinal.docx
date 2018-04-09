@@ -1,0 +1,532 @@
+#include <Servo.h>
+#define echo1 53
+#define echo2 51
+#define echo3 49
+#define echo4 47
+#define echo5 45
+#define echo6 43
+#define echo7 41
+#define echo8 39 
+#define trigger1 52
+#define trigger2 50
+#define trigger3 48 
+#define trigger4 46 
+#define trigger5 44 
+#define trigger6 42
+#define trigger7 40 
+#define trigger8 38
+#define LEDPin 4
+
+Servo myservo;
+long duration;
+long distance1,distance2,distance3,distance4=0,distance5,distance6,distance7,distance8;
+long max_range = 5 , least_range = 2;
+int pos;
+
+void setup() {
+
+pinMode(LEDPin, OUTPUT);
+pinMode(22, OUTPUT);
+pinMode(23, OUTPUT);
+pinMode(24, OUTPUT);
+pinMode(25, OUTPUT);
+pinMode(26, OUTPUT);
+pinMode(27, OUTPUT);
+pinMode(28, OUTPUT);
+pinMode(29, OUTPUT);
+pinMode(30, OUTPUT);
+pinMode(31, OUTPUT);
+pinMode(32, OUTPUT);
+pinMode(33, OUTPUT);
+pinMode(34, OUTPUT);
+pinMode(35, OUTPUT);
+pinMode(36, OUTPUT);
+pinMode(37, OUTPUT);
+
+ Serial.begin(9600);
+ myservo.attach(9);
+ 
+ pinMode(trigger1, OUTPUT);
+ pinMode(echo1, INPUT);
+ digitalWrite(trigger1, LOW); 
+
+ pinMode(trigger2, OUTPUT);
+ pinMode(echo2, INPUT);
+ digitalWrite(trigger2, LOW); 
+
+ pinMode(trigger3, OUTPUT);
+ pinMode(echo3, INPUT);
+ digitalWrite(trigger3, LOW); 
+
+ pinMode(trigger4, OUTPUT);
+ pinMode(echo4, INPUT);
+ digitalWrite(trigger4, LOW); 
+
+ pinMode(trigger5, OUTPUT);
+ pinMode(echo5, INPUT);
+ digitalWrite(trigger5, LOW); 
+
+ pinMode(trigger6, OUTPUT);
+ pinMode(echo6, INPUT);
+ digitalWrite(trigger6, LOW); 
+
+ pinMode(trigger7, OUTPUT);
+ pinMode(echo7, INPUT);
+ digitalWrite(trigger7, LOW); 
+
+ pinMode(trigger8, OUTPUT);
+ pinMode(echo8, INPUT);
+ digitalWrite(trigger8, LOW);
+  
+ digitalWrite(32, HIGH);
+ digitalWrite(34, HIGH);
+ digitalWrite(30, HIGH);
+ digitalWrite(36,HIGH);
+ digitalWrite(22, HIGH);
+ digitalWrite(28,HIGH);
+ digitalWrite(27,HIGH);
+ digitalWrite(24,HIGH);
+ /*digitalWrite(23, LOW);
+ digitalWrite(25, LOW);
+ digitalWrite(26, LOW);
+ digitalWrite(29, LOW);
+ digitalWrite(31, LOW);
+ digitalWrite(33, LOW);
+ digitalWrite(35, LOW);
+ digitalWrite(37, LOW);*/
+}
+
+void loop() {
+    int flag = 0;
+    char result = Serial.read();
+     switch(result)
+     {
+      //red led for first
+      case 'a':
+          // Turn OFF LED
+          digitalWrite(30, LOW);
+          digitalWrite(31, HIGH);
+          break;
+          
+      case 'b':
+          // Turn ON LED
+          digitalWrite(30, HIGH);
+          digitalWrite(31, LOW);
+          //delay(10000);
+          break;
+          
+        //second red led
+        case 'c':
+          // Turn OFF LED
+          digitalWrite(32, LOW);
+          digitalWrite(33, HIGH);
+          break;
+          
+        case 'd':
+          // Turn ON LED
+          digitalWrite(32, HIGH);
+          digitalWrite(33, LOW);
+          //delay(10000);
+          break;
+          
+        
+        case 'e':
+          // Turn OFF LED
+          digitalWrite(34, LOW);
+          digitalWrite(35, HIGH);
+          break;
+          
+        case 'f':
+          // Turn ON LED
+          digitalWrite(34, HIGH);
+          digitalWrite(35, LOW);
+          //delay(10000);
+          break;
+          
+        
+        case 'g':
+          // Turn OFF LED
+          digitalWrite(37,HIGH);
+          digitalWrite(36, LOW);        
+          break;
+          
+        case 'h':
+          // Turn ON LED
+          digitalWrite(36,HIGH);
+          digitalWrite(37, LOW);
+          
+          //delay(10000);
+          break;
+          
+        
+         case 'i':
+          // Turn OFF LED
+          digitalWrite(23, HIGH);
+          digitalWrite(22, LOW);
+          break;
+           
+        case 'j':
+          // Turn ON LED
+          digitalWrite(22, HIGH);
+          digitalWrite(23, LOW);
+         // delay(10000);
+          break;
+          
+       
+          
+        case 'k':
+          // Turn OFF LED
+          digitalWrite(25, HIGH);
+          digitalWrite(24, LOW);
+          break;
+        
+        case 'l':
+          // Turn ON LED
+          digitalWrite(24, HIGH);
+          digitalWrite(25, LOW);
+          //delay(10000);
+          break;
+          
+        
+
+        case 'm':
+          // Turn OFF LED
+          digitalWrite(26, HIGH);
+          digitalWrite(27, LOW);
+          break;
+        case 'n':
+          // Turn ON LED
+         digitalWrite(27, HIGH);
+         digitalWrite(26, LOW);
+          //delay(10000);
+          break;
+          
+        
+        case 'o':
+          // Turn OFF LED
+          digitalWrite(29,HIGH);
+          digitalWrite(28, LOW);
+          break;
+        
+        case 'p':
+          // Turn ON LED
+          digitalWrite(28,HIGH);
+          digitalWrite(29, LOW);
+          //delay(10000);
+          break;
+          
+        case 'y':
+                myservo.write(0);     // sets the servo at 0 degree position    
+                //delay(1000);          // waits for the servo to get there    
+                //myservo.write(90);    // sets the servo at 90 degree position    
+                //delay(1000);          // waits for the servo to get there    
+                break;
+        case 'z':myservo.write(90);   // sets the servo at 180 degree position    
+                //delay(1000);          // waits for the servo to get there    
+                //myservo.write(0);    // sets the servo at 90 degree position    
+                //delay(1000);          // waits for the servo to get there  
+                break;
+        
+       
+          
+   }
+ if(!digitalRead(36))
+ {
+      digitalWrite(trigger1, LOW);
+     digitalWrite(trigger1, HIGH);
+     delayMicroseconds(10); 
+     digitalWrite(trigger1, LOW);
+     duration = pulseIn(echo1, HIGH);
+     distance1 = duration/58;
+    
+     if ((distance1 <= max_range) && (distance1 >= 2))
+     {
+          distance1=1;
+          digitalWrite(37, LOW);
+          //digitalWrite(36, HIGH);
+     }
+     else
+     {
+          if(!digitalRead(37)&& !digitalRead(36))
+          {
+          distance1 = 2;
+          digitalWrite(36, HIGH);
+          //myservo.write(0);
+          //delay(1000);
+         // myservo.write(90);
+          }
+          else
+          {
+          distance1 = 0;
+          //digitalWrite(37, HIGH);
+          //digitalWrite(36, LOW);
+           }
+       }
+ }
+  else
+ {
+  distance1=0;
+ }
+
+ 
+ if(!digitalRead(34))
+ {
+        digitalWrite(trigger2, LOW); 
+       digitalWrite(trigger2, HIGH);
+       delayMicroseconds(10); 
+       digitalWrite(trigger2, LOW);
+       duration = pulseIn(echo2, HIGH);
+       distance2 = duration/58;
+       if ((distance2 >= max_range) || (distance2 <= 2) )
+       {
+            if(!digitalRead(35)&& !digitalRead(34))
+            {
+              distance2 = 2;
+              digitalWrite(34, HIGH);
+              //myservo.write(0);
+              //delay(8000);
+              //myservo.write(90);
+            }
+            else
+            {
+              distance2 = 0;
+           // digitalWrite(34, LOW);
+            //digitalWrite(35, HIGH);
+            }
+       }
+       else
+       {
+        distance2 = 1;
+        digitalWrite(35, LOW);
+       // digitalWrite(34, HIGH);
+       }
+ }
+  else
+ {
+  distance2=0;
+ }
+
+
+
+if( !digitalRead(32))
+{
+     digitalWrite(trigger3, LOW); 
+     digitalWrite(trigger3, HIGH);
+     delayMicroseconds(10); 
+     digitalWrite(trigger3, LOW);
+     duration = pulseIn(echo3, HIGH);
+     distance3 = duration/58;
+     if ((distance3 >= max_range) || (distance3 <= 2))
+     {
+            if(!digitalRead(32) && !digitalRead(33))
+            {
+              distance3 = 2;
+              digitalWrite(32, HIGH);
+             // myservo.write(0);
+             // delay(8000);
+             // myservo.write(90);
+            }
+            else
+            {
+            distance3 =0;
+            //digitalWrite(33, HIGH);
+            }
+     }
+     else
+     {
+      distance3 = 1;
+      digitalWrite(33, LOW);
+      //digitalWrite(32, HIGH);
+     }
+}
+ else
+ {
+  distance3 = 0;
+ }
+
+
+
+ if(!digitalRead(30))
+ {
+     digitalWrite(trigger4, LOW); 
+     digitalWrite(trigger4, HIGH);
+     delayMicroseconds(10); 
+     digitalWrite(trigger4, LOW);
+     duration = pulseIn(echo4, HIGH);
+     distance4 = duration/58;
+     if ((distance4 >= max_range) || (distance4 <= 2))
+     {
+           if(!digitalRead(30)&& !digitalRead(31))
+          {
+              distance4 = 2;
+              digitalWrite(30, HIGH);
+             // myservo.write(0);
+             // delay(8000);
+             // myservo.write(90);
+          }
+          else{
+          distance4 = 0;}
+          //digitalWrite(30, LOW);
+          //digitalWrite(31, HIGH);
+     }
+     else
+      {
+        distance4 = 1;
+        //digitalWrite(30, HIGH);
+        digitalWrite(31, LOW);
+        //digitalWrite(30, HIGH);
+     }
+ }
+ else
+ {
+  distance4=0;
+ }
+
+
+
+
+delay(50);
+if(!digitalRead(28))
+{
+     digitalWrite(trigger5, LOW); 
+     digitalWrite(trigger5, HIGH);
+     delayMicroseconds(10); 
+     digitalWrite(trigger5, LOW);
+     duration = pulseIn(echo5, HIGH);
+     distance5 = duration/58;
+     if ((distance5 >= max_range) || (distance5 <= 2))
+     {
+          if(!digitalRead(28) && !digitalRead(29))
+          {
+              distance5 =2;
+              digitalWrite(28, HIGH);
+              
+          }
+          else
+          {
+              distance5 =0;
+          }
+     }
+     else
+     {
+      
+          distance5 = 1;
+          digitalWrite(29, LOW);
+     }
+
+}
+else
+{
+    distance5 =0;
+}
+
+
+if(!digitalRead(27))
+{
+       digitalWrite(trigger6, LOW); 
+       digitalWrite(trigger6, HIGH);
+       delayMicroseconds(10); 
+       digitalWrite(trigger6, LOW);
+       duration = pulseIn(echo6, HIGH);
+       distance6 = duration/58;
+       if ((distance6 >= max_range) || (distance6 <= 2))
+       {
+            if(!digitalRead(27) && !digitalRead(26))
+            {
+                
+                distance6 = 2;
+                digitalWrite(27, HIGH);
+                myservo.write(0);
+                delay(3000);
+                myservo.write(90);
+                
+            }
+            else
+            {
+                distance6 =0;
+                
+            }
+       }
+       else
+       {
+        
+        digitalWrite(26, LOW);
+        distance6 = 1;
+       }
+}
+else
+{
+     distance6=0;
+}
+
+
+
+if(!digitalRead(24))
+{
+     digitalWrite(trigger7, LOW); 
+     digitalWrite(trigger7, HIGH);
+     delayMicroseconds(10); 
+     digitalWrite(trigger7, LOW);
+     duration = pulseIn(echo7, HIGH);
+     distance7 = duration/58;
+     if ((distance7 >= max_range) || (distance7 <= 2))
+     {
+         if(!digitalRead(24) && !digitalRead(25))
+         {
+            
+            distance7 = 2;
+            digitalWrite(24, HIGH);
+         }
+         else
+         {
+            distance7 =0;
+         }
+     }
+     else
+     {
+      distance7 = 1;
+      digitalWrite(25, LOW);
+     }
+}
+else
+{
+    distance7 = 0;
+}
+
+ if(!digitalRead(22))
+ {
+     digitalWrite(trigger8, LOW); 
+     digitalWrite(trigger8, HIGH);
+     delayMicroseconds(10); 
+     digitalWrite(trigger8, LOW);
+     duration = pulseIn(echo8, HIGH);
+     distance8 = duration/58;
+     if ((distance8 >= max_range) || (distance8 <= 2))
+     {
+      if(!digitalRead(22) && !digitalRead(23))
+      {
+           distance8 = 2;
+           digitalWrite(22, HIGH);
+           myservo.write(0);
+           delay(3000);
+           myservo.write(90);
+      }
+      else
+       {
+         distance8 = 0;
+       }
+     }
+     else
+     {
+      distance8 = 1;
+      digitalWrite(23, LOW);
+      //digitalWrite(22, HIGH);
+     }
+ }
+ else
+ {
+     distance8 = 0;
+ }
+  Serial.println(String(distance4) + String(distance3) + String(distance2)+ String(distance1) + String(distance8) + String(distance7) + String(distance6) + String(distance5));
+delay(100);
+}

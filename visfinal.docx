@@ -1,0 +1,1146 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO.Ports;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+namespace Parking_Project_Design
+{
+    public partial class Form1 : Form
+    {
+        string imageloc = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\black-mustang-car-clipart-27.png";
+        string avl = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+        public string connectionString = "SERVER=park-prj.cd8ikscfhncx.us-east-2.rds.amazonaws.com;DATABASE=parking;UID=aditya;PASSWORD=adityajha;"; 
+               
+        public Form1()
+        {
+            InitializeComponent();
+            
+        }
+        delegate void SetTextDelegate(string value); 
+        
+        public void SetText(string value)
+        {
+            if (InvokeRequired)
+                try
+                {
+                    Invoke(new SetTextDelegate(SetText), value);
+                }
+                catch { }
+            else
+                richTextBox6.Text = value;
+
+            try
+            {
+                //slot 1
+                if (value[0] == '1')
+                {
+                    pictureBox11.ImageLocation = imageloc;
+                }
+                else if (value[0] == '2')
+                {
+                    serialPort1.WriteLine("b");
+                    pictureBox3.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox1.Text = "Available";
+                    richTextBox2.Text += "\nSlot 1 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot1=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button1.Enabled = true;
+                    button2.Enabled = false;
+
+                }
+                else
+                {
+                    pictureBox11.ImageLocation = null;
+                }
+
+                //slot 2
+                if (value[1] == '1')
+                {
+                    pictureBox12.ImageLocation = imageloc;
+                }
+                else if (value[1] == '2')
+                {
+                    serialPort1.WriteLine("d");
+                    pictureBox1.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox2.Text = "Available";
+                    richTextBox2.Text += "\nSlot 2 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot2=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button3.Enabled = false;
+                    button4.Enabled = true;
+
+                }
+                else
+                {
+                    pictureBox12.ImageLocation = null;
+                }
+
+                //slot 3
+                if (value[2] == '1')
+                {
+                    pictureBox13.ImageLocation = imageloc;
+                }
+                else if (value[2] == '2')
+                {
+                    serialPort1.WriteLine("f");
+                    pictureBox4.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox3.Text = "Available";
+                    richTextBox2.Text += "\nSlot 3 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot3=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button7.Enabled = false;
+                    button8.Enabled = true;
+                }
+                else
+                {
+                    pictureBox13.ImageLocation = null;
+                }
+
+                //slot 4
+                if (value[3] == '1')
+                {
+                    pictureBox14.ImageLocation = imageloc;
+                }
+                else if(value[3]=='2')
+                {
+                    serialPort1.WriteLine("h");
+                    pictureBox2.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox4.Text = "Available";
+                    richTextBox2.Text += "\nSlot 4 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot4=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button5.Enabled = false;
+                    button6.Enabled = true;
+                }
+                else
+                {
+                    pictureBox14.ImageLocation = null;
+                }
+
+                //slot 5
+                if (value[4] == '1')
+                {
+                    pictureBox18.ImageLocation = imageloc;
+                }
+                else if(value[4]=='2')
+                {
+                    serialPort1.WriteLine("j");
+                    pictureBox8.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox8.Text = "Available";
+                    richTextBox2.Text += "\nSlot 5 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot5=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button15.Enabled = false;
+                    button16.Enabled = true;
+                }
+                else
+                {
+                    pictureBox18.ImageLocation = null;
+                }
+                //slot 6
+                if (value[5] == '1')
+                {
+                    pictureBox17.ImageLocation = imageloc;
+                }
+                else if(value[5]=='2')
+                {
+                    serialPort1.WriteLine("l");
+                    pictureBox7.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox7.Text = "Available";
+                    richTextBox2.Text += "\nSlot 6 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot6=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button13.Enabled = false;
+                    button14.Enabled = true;
+                }
+                else
+                {
+                    pictureBox17.ImageLocation = null;
+                }
+                //slot 7
+                if (value[6] == '1')
+                {
+                    pictureBox16.ImageLocation = imageloc;
+                }
+                else if(value[6]=='2')
+                {
+                    serialPort1.WriteLine("n");
+                    pictureBox6.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox6.Text = "Available";
+                    richTextBox2.Text += "\nSlot 7 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot7=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button11.Enabled = false;
+                    button12.Enabled = true;
+                }
+                else
+                {
+                    pictureBox16.ImageLocation = null;
+                }
+                //slot 8 
+                if (value[7] == '1')
+                {
+                    pictureBox15.ImageLocation = imageloc;
+                }
+                else if(value[7]=='2')
+                {
+                    serialPort1.WriteLine("p");
+                    pictureBox5.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                    textBox5.Text = "Available";
+                    richTextBox2.Text += "\nSlot 8 is available for Parking";
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    connection.Open();
+                    string query = "update park1 set slot8=0 where slot='slot'";
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    button9.Enabled = false;
+                    button10.Enabled = true;
+                }
+                else
+                {
+                    pictureBox15.ImageLocation = null;
+                }
+
+                
+
+
+            }
+            catch 
+            { 
+
+            }
+        }
+        //Important Data is received form Arduino to Machine
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            string indata = serialPort1.ReadLine();
+            SetText(indata);
+            
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            serialPort1.PortName = comboBox10.SelectedItem.ToString();//com4
+            serialPort1.BaudRate = Int32.Parse(comboBox11.SelectedItem.ToString());
+            serialPort1.Open();
+            button17.Text = "<Connected>";
+            button17.Enabled = false;
+            button24.Enabled = true;
+            richTextBox1.Text = "\tSelected Configurations" + Environment.NewLine + Environment.NewLine + "Arduino Type:   " + comboBox9.Text + Environment.NewLine + "Communication Port:   " + comboBox10.Text + Environment.NewLine + "Baud Rate:   " + comboBox11.Text+Environment.NewLine+" Connection Successfull !!";
+            serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+            progressBar1.Value=0;
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = 8; 
+            richTextBox1.Text = "Welcome to Connection Manger";
+            button24.Enabled = false;
+            foreach (string s in SerialPort.GetPortNames())
+            {
+                comboBox10.Items.Add(s);
+            }
+            try
+            {
+                if (comboBox10.Items.Count > 0)
+                    comboBox10.SelectedIndex = comboBox10.Items.Count - 1;
+                else
+                    comboBox10.SelectedIndex = 1;
+            }
+            catch 
+            {
+                MessageBox.Show("Error in selecting Com port");
+            }
+            
+
+            comboBox11.Items.Add("2400");
+            comboBox11.Items.Add("4800");
+            comboBox11.Items.Add("9600");
+            comboBox11.Items.Add("14400");
+            comboBox11.Items.Add("19200");
+            comboBox11.Items.Add("28800");
+            comboBox11.Items.Add("38400");
+            comboBox11.Items.Add("57600");
+            comboBox11.Items.Add("115200");
+            comboBox11.Items.Add("1382400");
+            comboBox11.SelectedIndex = 2;
+
+            comboBox9.Items.Add("Micro");
+            comboBox9.Items.Add("Nano");
+            comboBox9.Items.Add("Uno");
+            comboBox9.Items.Add("Mega");
+            comboBox9.Items.Add("Dimitri");
+            comboBox9.SelectedIndex = 3;
+
+            comboBox3.Items.Add("1 hour");
+            comboBox3.Items.Add("3 hour");
+            comboBox3.Items.Add("5 hour");
+            comboBox3.SelectedIndex = 2;
+
+            comboBox1.Items.Add("1 hour");
+            comboBox1.Items.Add("3 hour");
+            comboBox1.Items.Add("5 hour");
+            comboBox1.SelectedIndex = 2;
+
+            comboBox2.Items.Add("1 hour");
+            comboBox2.Items.Add("3 hour");
+            comboBox2.Items.Add("5 hour");
+            comboBox2.SelectedIndex = 2;
+
+            comboBox4.Items.Add("1 hour");
+            comboBox4.Items.Add("3 hour");
+            comboBox4.Items.Add("5 hour");
+            comboBox4.SelectedIndex = 2;
+
+            comboBox8.Items.Add("1 hour");
+            comboBox8.Items.Add("3 hour");
+            comboBox8.Items.Add("5 hour");
+            comboBox8.SelectedIndex = 2;
+
+            comboBox7.Items.Add("1 hour");
+            comboBox7.Items.Add("3 hour");
+            comboBox7.Items.Add("5 hour");
+            comboBox7.SelectedIndex = 2;
+
+            comboBox6.Items.Add("1 hour");
+            comboBox6.Items.Add("3 hour");
+            comboBox6.Items.Add("5 hour");
+            comboBox6.SelectedIndex = 2;
+
+            comboBox5.Items.Add("1 hour");
+            comboBox5.Items.Add("3 hour");
+            comboBox5.Items.Add("5 hour");
+            comboBox5.SelectedIndex = 2;
+
+            pictureBox3.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            pictureBox1.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            pictureBox4.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            pictureBox2.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            pictureBox8.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            pictureBox7.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            pictureBox6.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            pictureBox5.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+
+
+
+            textBox1.Text = "Available";
+            textBox2.Text = "Available";
+            textBox3.Text = "Available";
+            textBox4.Text = "Available";
+            textBox5.Text = "Available";
+            textBox6.Text = "Available";
+            textBox7.Text = "Available";
+            textBox8.Text = "Available";
+
+            pictureBox11.Image = null;
+            pictureBox12.Image = null;
+            pictureBox13.Image = null;
+            pictureBox14.Image = null;
+            pictureBox15.Image = null;
+            pictureBox16.Image = null;
+            pictureBox17.Image = null;
+            pictureBox18.Image = null; 
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            button17.Text = "Connect";
+            button17.Enabled = true;
+            richTextBox1.Text = "Disconnected successfully !!";
+            serialPort1.Close(); // important
+            Application.Restart();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("a");
+                pictureBox3.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox1.Text = "Reserved";
+                richTextBox2.Text += "\nSlot #1 is reserved for " + richTextBox8.Text + " for " + comboBox1.Text;
+                richTextBox4.Text += "\n*******\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('1','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot1=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+                
+                connection.Close();
+                button1.Enabled=false;
+                button2.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+        }
+
+        public void button2_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("b");
+            pictureBox3.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox1.Text = "Available";
+            richTextBox2.Text += "\nSlot 1 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot1=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button1.Enabled = true;
+            button2.Enabled = false;
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("c");
+                pictureBox1.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox2.Text = "Reserved";
+                richTextBox2.Text += "\nSlot #2 is reserved for " + richTextBox8.Text + " for " + comboBox1.Text;
+                richTextBox4.Text += "\n*******\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('2','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot2=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+                
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+                
+                connection.Close();
+                button4.Enabled = false;
+                button3.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("y");
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("z");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("d");
+            pictureBox1.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox2.Text = "Available";
+            richTextBox2.Text += "\nSlot 2 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot2=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button3.Enabled = false;
+            button4.Enabled = true;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("e");
+                pictureBox4.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox3.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 3 is reserved for " + richTextBox8.Text + " for " + comboBox4.Text;
+                richTextBox4.Text += "\n*********************\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('3','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot3=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+                
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+                
+                connection.Close();
+                button8.Enabled = false;
+                button7.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("f");
+            pictureBox4.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox3.Text = "Available";
+            richTextBox2.Text += "\nSlot 3 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot3=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button7.Enabled = false;
+            button8.Enabled = true;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("g");
+                pictureBox2.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox4.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 4 is reserved for " + richTextBox8.Text + " for " + comboBox4.Text;
+                richTextBox4.Text += "\n*********************\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('4','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot4=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+                
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+                connection.Close();
+                button6.Enabled = false;
+                button5.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("h");
+            pictureBox2.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox4.Text = "Available";
+            richTextBox2.Text += "\nSlot 4 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot4=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button5.Enabled = false;
+            button6.Enabled = true;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("i");
+                pictureBox8.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox8.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 5 is reserved for " + richTextBox8.Text + " for " + comboBox4.Text;
+                richTextBox4.Text += "\n*********************\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('5','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot5=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+                
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+                
+                connection.Close();
+                button16.Enabled = false;
+                button15.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("j");
+            pictureBox8.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox8.Text = "Available";
+            richTextBox2.Text += "\nSlot 5 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot5=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button15.Enabled = false;
+            button16.Enabled = true;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("k");
+                pictureBox7.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox7.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 6 is reserved for " + richTextBox8.Text + " for " + comboBox4.Text;
+                richTextBox4.Text += "\n*********************\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('6','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot6=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+                
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+                connection.Close();
+                button14.Enabled = false;
+                button13.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("l");
+            pictureBox7.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox7.Text = "Available";
+            richTextBox2.Text += "\nSlot 6 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot6=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button13.Enabled = false;
+            button14.Enabled = true;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("m");
+                pictureBox6.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox6.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 7 is reserved for " + richTextBox8.Text + " for " + comboBox4.Text;
+                richTextBox4.Text += "\n*********************\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('7','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot7=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+                
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+                connection.Close();
+                button12.Enabled = false;
+                button11.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("n");
+            pictureBox6.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox6.Text = "Available";
+            richTextBox2.Text += "\nSlot 7 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot7=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button11.Enabled = false;
+            button12.Enabled = true;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (richTextBox8.Text != "")
+            {
+                serialPort1.WriteLine("o");
+                pictureBox5.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox5.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 8 is reserved for " + richTextBox8.Text + " for " + comboBox4.Text;
+                richTextBox4.Text += "\n*********************\nCar Number: " + richTextBox8.Text + "\nOwner Name: " + richTextBox7.Text + "\nContact number: " + richTextBox5.Text + "\nEmail-id: " + richTextBox3.Text;
+
+                string q = "insert into cardet values('8','" + richTextBox8.Text + "','" + richTextBox7.Text + "','" + richTextBox5.Text + "','" + richTextBox3.Text + "')";
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string query = "update park1 set slot8=1 where slot='slot'";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = query;
+                cmd.Connection = connection;
+
+                cmd.ExecuteNonQuery();
+                
+                MySqlCommand cd = new MySqlCommand();
+                cd.CommandText = q;
+                cd.Connection = connection;
+                cd.ExecuteNonQuery();
+
+                connection.Close();
+                button10.Enabled = false;
+                button9.Enabled = true;
+            }
+            else
+                MessageBox.Show("Please enter valid car number");
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("p");
+            pictureBox5.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+            textBox5.Text = "Available";
+            richTextBox2.Text += "\nSlot 8 is available for Parking";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query = "update park1 set slot8=0 where slot='slot'";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = query;
+            cmd.Connection = connection;
+            cmd.ExecuteNonQuery();
+            connection.Close();
+            button9.Enabled = false;
+            button10.Enabled = true;
+        }
+        private void button26_Click(object sender, EventArgs e)
+        {
+            string q = "select * from park1 where slot='slot'";
+            int[] ar = new int[8];
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = q;
+            cmd.Connection = connection;
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                ar[0] = rdr.GetInt32(1);
+                ar[1] = rdr.GetInt32(2);
+                ar[2] = rdr.GetInt32(3);
+                ar[3] = rdr.GetInt32(4);
+                ar[4] = rdr.GetInt32(5);
+                ar[5] = rdr.GetInt32(6);
+                ar[6] = rdr.GetInt32(7);
+                ar[7] = rdr.GetInt32(8);
+
+            }
+            rdr.Close();
+            connection.Close();
+            if (ar[0] == 1)
+            {
+                serialPort1.WriteLine("a");
+                pictureBox3.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox1.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 1 is reserved ";
+                button1.Enabled = false;
+                button2.Enabled = true;
+
+            }
+            if (ar[0] == 0)
+            {
+                serialPort1.WriteLine("b");
+                pictureBox3.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox1.Text = "Available";
+                richTextBox2.Text += "\nSlot 1 is available for Parking";
+                button1.Enabled = true;
+                button2.Enabled = false;
+
+
+            }
+            if (ar[1] == 1)
+            {
+                serialPort1.WriteLine("c");
+                pictureBox1.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox2.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 2 is reserved ";
+                button4.Enabled = false;
+                button3.Enabled = true;
+
+            }
+            if (ar[1] == 0)
+            {
+                serialPort1.WriteLine("d");
+                pictureBox1.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox2.Text = "Available";
+                richTextBox2.Text += "\nSlot 2 is available for Parking";
+                button4.Enabled = true;
+                button3.Enabled = false;
+
+
+            }
+            if (ar[2] == 1)
+            {
+                serialPort1.WriteLine("e");
+                pictureBox4.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox3.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 3 is reserved ";
+                button8.Enabled = false;
+                button7.Enabled = true;
+
+            }
+            if (ar[2] == 0)
+            {
+                serialPort1.WriteLine("f");
+                pictureBox4.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox3.Text = "Available";
+                richTextBox2.Text += "\nSlot 3 is available for Parking";
+                button8.Enabled = true;
+                button7.Enabled = false;
+
+
+            }
+            if (ar[3] == 1)
+            {
+                serialPort1.WriteLine("g");
+                pictureBox2.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox4.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 4 is reserved ";
+                button6.Enabled = false;
+                button5.Enabled = true;
+
+            }
+            if (ar[3] == 0)
+            {
+                serialPort1.WriteLine("h");
+                pictureBox2.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox4.Text = "Available";
+                richTextBox2.Text += "\nSlot 4 is available for Parking";
+                button6.Enabled = true;
+                button5.Enabled = false;
+
+
+            }
+            if (ar[4] == 1)
+            {
+                serialPort1.WriteLine("i");
+                pictureBox8.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox8.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 5 is reserved ";
+                button16.Enabled = false;
+                button15.Enabled = true;
+
+            }
+            if (ar[4] == 0)
+            {
+                serialPort1.WriteLine("j");
+                pictureBox8.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox8.Text = "Available";
+                richTextBox2.Text += "\nSlot 5 is available for Parking";
+                button16.Enabled = true;
+                button15.Enabled = false;
+
+
+            }
+            if (ar[5] == 1)
+            {
+                serialPort1.WriteLine("k");
+                pictureBox7.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox7.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 6 is reserved ";
+                button14.Enabled = false;
+                button13.Enabled = true;
+
+            }
+            if (ar[5] == 0)
+            {
+                serialPort1.WriteLine("l");
+                pictureBox7.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox7.Text = "Available";
+                richTextBox2.Text += "\nSlot 6 is available for Parking";
+                button14.Enabled = true;
+                button13.Enabled = false;
+
+
+            }
+            if (ar[6] == 1)
+            {
+                serialPort1.WriteLine("m");
+                pictureBox6.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox6.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 7 is reserved ";
+                button12.Enabled = false;
+                button11.Enabled = true;
+
+            }
+            if (ar[6] == 0)
+            {
+                serialPort1.WriteLine("n");
+                pictureBox6.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox6.Text = "Available";
+                richTextBox2.Text += "\nSlot 7 is available for Parking";
+                button12.Enabled = true;
+                button11.Enabled = false;
+
+
+            }
+            if (ar[7] == 1)
+            {
+                serialPort1.WriteLine("o");
+                pictureBox5.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\Citroen-C-Elysee-Transparent-Background.png";
+                textBox5.Text = "Reserved";
+                richTextBox2.Text += "\nSlot 8 is reserved ";
+                button10.Enabled = false;
+                button9.Enabled = true;
+
+            }
+            if (ar[7] == 0)
+            {
+                serialPort1.WriteLine("p");
+                pictureBox5.ImageLocation = @"C:\Users\ADITYA KUMAR\Desktop\Code\All Prog files\Parking Project Design\Parking Project Design\images\available_now.png";
+                textBox5.Text = "Available";
+                richTextBox2.Text += "\nSlot 8 is available for Parking";
+                button10.Enabled = true;
+                button9.Enabled = false;
+
+
+            }
+
+
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void pictureBox12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            richTextBox8.Text = "";
+            richTextBox5.Text = "";
+            richTextBox7.Text = "";
+            richTextBox3.Text = "";
+            
+        }
+
+        private void comboBox10_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
+    }
+}
